@@ -1,0 +1,12 @@
+.contenido__formu {
+    display: flex!important;
+    flex-flow: wrap-reverse!important;
+}
+  
+.text-align-center{
+    text-align: center!important;
+}
+
+.btn__registro{
+    width: -webkit-fill-available;
+}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head_tittle %}Bienvenidos | {{ block.super}}{% endblock %}
+
+    <style>
+        {% block style %}
+        .jumbo{
+        background: #2b3bf9;
+        color: #f0f8ff;
+        }
+        {% endblock %}
+    </style>
+
+{% block jumbotron %}
+{% if request.user.is_staff %}
+<div class="container mt-5">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+               <th scope="col">#</th>
+               <th scope="col">Correo</th>
+               <th scope="col">Nombre</th>
+               <th scope="col">Fecha de registro</th>
+               <th scope="col">Tiempo</th>
+            </tr>
+          </thead>
+        {% for instance in queryset %}
+        <tr>
+            <td scope="col">{{ forloop.counter }}</td>
+            <td scope="col">{{ instance }}</td>
+            <td scope="col">{{instance.nombre}}</td>
+            <td scope="col">{{instance.timestamp}}</td>
+            <td scope="col">Hace {{instance.timestamp | timesince}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<div class="p-5 jumbo mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <h1>Probar Django 3.26</h1>
+                <p class="lead">Un proyecto para principiantes. El objetivo es construir una página web simple al mismo tiempo, muy elegante, en poco tiempo.</p>
+                <a class="btn btn-lg btn-warning fw-bold text-dark" href="https://getbootstrap.com/docs/5.1/components/navbar/" target="_blank" role="button">Únete &raquo;</a>
+            </div>
+            <!-- Video -->
+            <div class="col-sm-6">
+                <video class="ratio " style="--bs-aspect-ratio: 50%;" width="360" height="315" autoplay muted loop>
+                    <source src="{% static 'img/Laptop.mp4' %}" frameborder="0" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+<br/>
+{% block content %}
+{% if not request.user.is_staff %}
+ <div class="row contenido__formu" >
+    <div class="col-sm-3 order-2">
+        <p class="lead text-align-center">Creado con Django &amp; Bootstrap</p>
+        <img class="img-fluid mx-auto d-block" src="{% static 'img/archivo.png' %}" alt="python.png" width="160px">
+    </div>
+    <div class="col-sm-3 order-3">
+        <p class="lead text-align-center">Desarrollo progresivo y sostenible.</p>
+        <img class="img-fluid mx-auto d-block" src="{% static 'img/despliegue.png' %}" alt="python.png" width="160px">
+    </div>
+    <div class="col-sm-3 order-4">
+        <p class="lead text-align-center">Código abierto, siempre.</p>
+        <img class="img-fluid mx-auto d-block" src="{% static 'img/open-source.png' %}" alt="python.png" width="160px">
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 order-5" >
+        {% if not user.is_authenticated %}
+        <p class="lead text-align-center">¡Suscríbete!</p>
+        <form action="" method="POST">{% csrf_token %}
+            {{ form | crispy}}
+            <br/>
+            <input class="btn btn-primary btn__registro" type="submit" value="Inscribirme">
+        </form>
+        {% else %}
+        <p class="lead text-align-center">{{titulo}}</p>
+        <div class="col-sm-3 mx-auto">
+            <p class="lead text-align-center">
+                <span class="fa-stack fa-1x">
+                    <i class="fas fa-square fa-stack-2x"></i>
+                    <i class="fas fa-terminal fa-stack-1x fa-inverse"></i>
+                </span>
+                <hr/>
+                ¿Listx para aprender?
+            </p>
+        </div>
+        {% endif %}
+        <br/>
+    </div>
+</div>
+<hr/>
+{% endif %}
+{% endblock %}

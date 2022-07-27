@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block head_tittle %}PDjango 326{% endblock %}</title>
+
+<meta name="theme-color" content="#7952b3">
+
+<style>
+  ::-webkit-scrollbar{
+    width: 10px!important;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0a1dcc!important;
+    border-radius: 50px!important;
+  }
+  
+  ::-webkit-scrollbar-thumb{
+    background: #0948a7!important;
+    border-radius: 50px!important;
+  }
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    .navbar-dark.bg-dark {
+    background-color: #2b3bf9!important;
+    }
+    {% block style %}{% endblock %}
+  </style>
+{% include "head_css.html" %}    
+  </head>
+  <body>
+    
+{% include "navbar.html" %}
+
+
+    {% block jumbotron %}
+
+    {% endblock %}
+  <div class="container">
+      {% block content %}
+      {% endblock %}
+  </div>
+    
+    <br/>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+      
+  </body>
+</html>

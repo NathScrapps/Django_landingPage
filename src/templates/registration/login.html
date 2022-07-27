@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-sm-3 offset-sm-4">
+  <br/>
+  <h2 class="text-align-center"><strong>Iniciar sesión</strong></h2>
+  <form method="post" action=".">
+    {% csrf_token %} 
+    {{ form | crispy }}
+    <br/>
+    <input class="btn btn-primary btn__registro" type="submit" value="{% trans 'Iniciar sesion' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <br/>
+  <p class="d-flex justify-content-center">{% trans "Has olvidado tu contrasena" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Restablecer" %}</a>!</p>
+  <p class="d-flex justify-content-center">{% trans "No tienes cuenta" %}? <a href="{% url 'registration_register' %}">{% trans "Registrarte" %}</a>!</p>
+</div>
+{% endblock %}
